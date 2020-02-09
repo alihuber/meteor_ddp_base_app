@@ -1,5 +1,5 @@
-import { Meteor } from "meteor/meteor";
-import { onPageLoad } from "meteor/server-render";
+import { Meteor } from 'meteor/meteor';
+import { onPageLoad } from 'meteor/server-render';
 
 Meteor.startup(() => {
   // Code to run on server startup.
@@ -8,8 +8,8 @@ Meteor.startup(() => {
 
 onPageLoad(sink => {
   // Code to run on every request.
-  sink.renderIntoElementById(
-    "server-render-target",
-    `Server time: ${new Date}`
-  );
+  // sink.renderIntoElementById(
+  //   "server-render-target",
+  //   `Server time: ${new Date}`
+  // );
 });
