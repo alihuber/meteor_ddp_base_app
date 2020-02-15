@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Menu } from 'antd';
 import { toast } from 'react-toastify';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 const handleLogin = (history) => {
   history.push('/login');
+};
+
+const handleUsers = (history) => {
+  history.push('/users');
 };
 
 const handleHome = (history) => {
@@ -24,7 +28,7 @@ const handleLogout = (history) => {
 
 const Navbar = () => {
   const history = useHistory();
-  const currentUser = useTracker(() => Meteor.user());
+  const currentUser = useContext(CurrentUserContext);
   return (
     <Menu
       theme="dark"
@@ -45,11 +49,20 @@ const Navbar = () => {
       ) : null}
       {currentUser ? (
         <Menu.Item
-          key="3"
+          key="4"
           style={{ float: 'right' }}
           onClick={() => handleLogout(history)}
         >
           Logout
+        </Menu.Item>
+      ) : null}
+      {currentUser && currentUser.admin ? (
+        <Menu.Item
+          key="3"
+          style={{ float: 'right' }}
+          onClick={() => handleUsers(history)}
+        >
+          Users
         </Menu.Item>
       ) : null}
     </Menu>

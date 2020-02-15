@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from './HomePage.js';
 import Login from './Login.js';
 import NotFoundPage from './NotFoundPage';
-// import Users from './admin/Users';
+import Users from './admin/Users';
 // import Settings from './Settings';
 // import Messages from './Messages';
 
@@ -21,6 +21,9 @@ const Routing = ({ LayoutComponent }) => {
             </Route>
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/users">
+              <Users />
             </Route>
             <Route exact>
               <NotFoundPage />

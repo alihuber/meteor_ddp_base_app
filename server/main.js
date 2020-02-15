@@ -1,9 +1,20 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { onPageLoad } from 'meteor/server-render';
 
+import './publications.js';
+
 Meteor.startup(() => {
-  // Code to run on server startup.
-  // console.log(`Greetings from ${module.id}!`);
+  const user = Meteor.users.findOne({ username: 'admin' });
+  if (!user) {
+    // logger.info('admin user not found, seeding admin user...');
+    Meteor.users.insert({ username: 'admin', admin: true });
+    const newUser = Meteor.users.findOne({ username: 'admin' });
+    const pw = process.env.ADMIN;
+    Accounts.setPassword(newUser._id, pw);
+  }
+
+  // logger.info(`server started... registered users: ${Meteor.users.find({}).fetch().length}`);
 });
 
 onPageLoad((sink) => {
