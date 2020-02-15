@@ -8,8 +8,6 @@ import './react-transitions.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 import 'uniforms-bridge-simple-schema-2';
 
-import '../../api/users/methods';
-
 Meteor.startup(() => {
   render(<Root />, document.getElementById('render-target'));
 });

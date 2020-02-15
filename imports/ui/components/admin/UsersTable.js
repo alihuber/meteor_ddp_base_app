@@ -4,12 +4,14 @@ import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Table, Divider, Icon, Button, Modal } from 'antd';
+import EditUserModal from './EditUserModal';
 import Loading from '../Loading';
 
 const { confirm } = Modal;
 
 const UsersTable = () => {
   const [editModalVisible, setEditModalVisible] = useState(false);
+  const [editUser, setEditUser] = useState(null);
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
   const showConfirmDelete = (userId) => {
@@ -29,6 +31,33 @@ const UsersTable = () => {
         });
       },
     });
+  };
+
+  const showEditUserModal = (user) => {
+    setEditUser(user);
+    setEditModalVisible(true);
+  };
+
+  const handleEditOk = (data, userId) => {
+    const update = { ...data, _id: userId };
+    Meteor.call('updateUser', update, (err, res) => {
+      if (err) {
+        toast.error('Update not successful!', {
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      } else {
+        toast.success('Update successful!', {
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
+    });
+    setEditUser(null);
+    setEditModalVisible(false);
+  };
+
+  const handleEditCancel = () => {
+    setEditModalVisible(false);
+    setEditUser(null);
   };
 
   const listLoading = useTracker(() => {
@@ -62,7 +91,12 @@ const UsersTable = () => {
     key: 'action',
     render: (text, record) => (
       <span>
-        <Button type="primary" icon="edit" size="small" />
+        <Button
+          type="primary"
+          icon="edit"
+          size="small"
+          onClick={() => showEditUserModal(record)}
+        />
         <Divider type="vertical" />
         <Button
           type="danger"
@@ -106,7 +140,15 @@ const UsersTable = () => {
   return listLoading ? (
     <Loading />
   ) : (
-    <Table columns={columns} dataSource={users} />
+    <>
+      <Table columns={columns} dataSource={users} />
+      <EditUserModal
+        user={editUser}
+        visible={editModalVisible}
+        onOk={handleEditOk}
+        onCancel={handleEditCancel}
+      />
+    </>
   );
 };
 

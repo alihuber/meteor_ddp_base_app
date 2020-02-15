@@ -17,18 +17,21 @@ Meteor.methods({
   updateUser: function(data) {
     const pattern = {
       _id: String,
-      username: Match.Maybe(String),
-      newPassword: Match.Maybe(String),
+      username: String,
+      password: Match.Maybe(String),
+      admin: Boolean,
     };
     check(data, pattern);
-    const isAdmin = Meteor.users.findOne(this.userId).admin;
+    const thisUser = Meteor.users.findOne(this.userId);
+    const isAdmin = thisUser?.admin;
     if (isAdmin) {
-      if (data.newPassword) {
-        Accounts.setPassword(data._id, data.newPassword);
+      if (data.password) {
+        Accounts.setPassword(data._id, data.password);
       }
       if (data.username) {
         Accounts.setUsername(data._id, data.username);
       }
+      Meteor.users.update({ _id: data._id }, { $set: { admin: data.admin } });
     } else {
       throw new Meteor.Error('update user error');
     }

@@ -18,7 +18,7 @@ const Users = () => {
   return (
     <div className={animationClass}>
       <Title level={3}>Users</Title>
-      {currentUser && currentUser.admin ? <UsersTable /> : null}
+      {currentUser?.admin ? <UsersTable /> : null}
     </div>
   );
 };

@@ -56,7 +56,7 @@ const Navbar = () => {
           Logout
         </Menu.Item>
       ) : null}
-      {currentUser && currentUser.admin ? (
+      {currentUser?.admin ? (
         <Menu.Item
           key="3"
           style={{ float: 'right' }}
