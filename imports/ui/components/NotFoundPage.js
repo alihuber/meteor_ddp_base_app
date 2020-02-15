@@ -1,17 +1,16 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { Typography } from 'antd';
+import AnimationContext from '../contexts/AnimationContext';
 
 const { Title } = Typography;
-// import AnimContext from '../contexts/AnimContext';
 
 const NotFoundPage = () => {
-  // const animClass = useContext(AnimContext);
-  return <Title level={2}>404 - Not found</Title>;
-  // return (
-  //   <div className={animClass}>
-  //   </div>
-  // );
+  const animClass = useContext(AnimationContext);
+  return (
+    <div className={animClass}>
+      <Title level={2}>Not found</Title>
+    </div>
+  );
 };
 
 export default NotFoundPage;

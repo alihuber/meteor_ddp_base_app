@@ -1,9 +1,8 @@
 import React from 'react';
+// TODO: toast
 // import { ToastContainer } from 'react-toastify';
 import Layout from './Layout';
 import Routing from './Routing';
-// import Loading from './Loading';
-// import CurrentUserContext from '../contexts/CurrentUserContext';
 import AnimationContext from '../contexts/AnimationContext';
 
 const Root = () => {
@@ -20,8 +19,6 @@ const Root = () => {
     </>
   );
 };
-// <CurrentUserContext.Provider value={currentUser}>
-// </CurrentUserContext.Provider>
 // <ToastContainer autoClose={3000} />
 
 export default Root;
