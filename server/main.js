@@ -3,6 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { onPageLoad } from 'meteor/server-render';
 
 import './publications.js';
+import '../imports/startup/server/methods';
 
 Meteor.startup(() => {
   const user = Meteor.users.findOne({ username: 'admin' });
