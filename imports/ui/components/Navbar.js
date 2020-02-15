@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Menu } from 'antd';
+import { toast } from 'react-toastify';
 
 const handleLogin = (history) => {
   history.push('/login');
@@ -14,9 +15,9 @@ const handleHome = (history) => {
 
 const handleLogout = (history) => {
   Meteor.logout(() => {
-    // toast.success('Logout successful!', {
-    //   position: toast.POSITION.BOTTOM_CENTER,
-    // });
+    toast.success('Logout successful!', {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
     history.push('/');
   });
 };

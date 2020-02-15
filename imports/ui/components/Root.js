@@ -1,9 +1,11 @@
 import React from 'react';
-// TODO: toast
-// import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+
 import Layout from './Layout';
 import Routing from './Routing';
 import AnimationContext from '../contexts/AnimationContext';
+
+toast.configure();
 
 const Root = () => {
   const layout = Layout;
@@ -16,9 +18,9 @@ const Root = () => {
       <AnimationContext.Provider value={animClass}>
         <Routing LayoutComponent={layout} />
       </AnimationContext.Provider>
+      <ToastContainer autoClose={3000} />
     </>
   );
 };
-// <ToastContainer autoClose={3000} />
 
 export default Root;

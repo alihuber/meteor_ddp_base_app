@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { AutoFields, AutoForm, ErrorsField, SubmitField } from 'uniforms-antd';
 import { Card } from 'antd';
 import SimpleSchema from 'simpl-schema';
+import { toast } from 'react-toastify';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import AnimationContext from '../contexts/AnimationContext';
 
@@ -35,15 +36,15 @@ const handleSubmit = (values, history) => {
   if (values.username && values.password) {
     Meteor.loginWithPassword(values.username, values.password, (err) => {
       if (err) {
-        console.log(err);
-        // toast.error('Login error!', {
-        //   position: toast.POSITION.BOTTOM_CENTER,
-        // });
+        // console.log(err);
+        toast.error('Login error!', {
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
         handleLogin(history);
       } else {
-        // toast.success('Login successful!', {
-        //   position: toast.POSITION.BOTTOM_CENTER,
-        // });
+        toast.success('Login successful!', {
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
         handleHome(history);
       }
     });
