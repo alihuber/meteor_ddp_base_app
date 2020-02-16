@@ -3,8 +3,11 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
+    "start-test-server": "METEOR_LOCAL_DIR=.meteor/test meteor",
     "test": "BABEL_ENV=COVERAGE COVERAGE=1 COVERAGE_OUT_HTML=1 COVERAGE_VERBOSE=1 COVERAGE_APP_FOLDER=$PWD/ meteor --inspect test --driver-package cultofcoders:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package cultofcoders:mocha",
+    "cypress:open": "cypress open",
+    "integration-test": "start-server-and-test start-test-server http://localhost:3000 cypress:open",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
@@ -25,6 +28,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "babel-plugin-istanbul": "^6.0.0",
+    "cypress": "^4.0.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.20.1",
@@ -32,7 +36,8 @@
     "eslint-plugin-meteor": "^6.0.0",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.3.0",
-    "npm-check-updates": "^4.0.1"
+    "npm-check-updates": "^4.0.1",
+    "start-server-and-test": "^1.10.8"
   },
   "meteor": {
     "mainModule": {

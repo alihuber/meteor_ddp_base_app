@@ -119,6 +119,7 @@ const UsersTable = () => {
     render: (text, record) => (
       <span>
         <Button
+          id={`editUser_${record._id}`}
           type="primary"
           icon="edit"
           size="small"
@@ -126,6 +127,7 @@ const UsersTable = () => {
         />
         <Divider type="vertical" />
         <Button
+          id={`deleteUser_${record._id}`}
           type="danger"
           icon="delete"
           size="small"
@@ -168,7 +170,11 @@ const UsersTable = () => {
     <Loading />
   ) : (
     <>
-      <Button type="primary" onClick={() => setCreateModalVisible(true)}>
+      <Button
+        id="createUserButton"
+        type="primary"
+        onClick={() => setCreateModalVisible(true)}
+      >
         Create user
       </Button>
       <Table columns={columns} dataSource={users} />

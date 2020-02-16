@@ -19,7 +19,7 @@ Meteor.methods({
       _id: String,
       username: String,
       password: Match.Maybe(String),
-      admin: Boolean,
+      admin: Match.Maybe(Boolean),
     };
     check(data, pattern);
     const thisUser = Meteor.users.findOne(this.userId);
