@@ -28,9 +28,7 @@ Meteor.methods({
       if (data.password) {
         Accounts.setPassword(data._id, data.password);
       }
-      if (data.username) {
-        Accounts.setUsername(data._id, data.username);
-      }
+      Accounts.setUsername(data._id, data.username);
       Meteor.users.update({ _id: data._id }, { $set: { admin: data.admin } });
     } else {
       throw new Meteor.Error('update user error');
@@ -50,7 +48,7 @@ Meteor.methods({
       const admin = data.admin || false;
       Meteor.users.update({ _id: newId }, { $set: { admin } });
     } else {
-      throw new Meteor.Error('update user error');
+      throw new Meteor.Error('add user error');
     }
   },
 });

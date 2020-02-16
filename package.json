@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
-    "test": "meteor test --once --driver-package meteortesting:mocha",
-    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "test": "BABEL_ENV=COVERAGE COVERAGE=1 COVERAGE_OUT_HTML=1 COVERAGE_VERBOSE=1 COVERAGE_APP_FOLDER=$PWD/ meteor --inspect test --driver-package cultofcoders:mocha",
+    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package cultofcoders:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
@@ -40,5 +40,14 @@
       "server": "server/main.js"
     },
     "testModule": "tests/main.js"
+  },
+  "babel": {
+    "env": {
+      "COVERAGE": {
+        "plugins": [
+          "istanbul"
+        ]
+      }
+    }
   }
 }
