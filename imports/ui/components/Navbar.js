@@ -1,9 +1,15 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Menu } from 'antd';
+import { Menu, Icon } from 'antd';
 import { toast } from 'react-toastify';
 import CurrentUserContext from '../contexts/CurrentUserContext';
+
+const { SubMenu } = Menu;
+
+const handleSettings = (history) => {
+  history.push('/settings');
+};
 
 const handleLogin = (history) => {
   history.push('/login');
@@ -30,11 +36,7 @@ const Navbar = () => {
   const history = useHistory();
   const currentUser = useContext(CurrentUserContext);
   return (
-    <Menu
-      theme="dark"
-      mode="horizontal"
-      style={{ lineHeight: '47px', height: '47px' }}
-    >
+    <Menu theme="dark" mode="horizontal">
       <Menu.Item key="1" onClick={() => handleHome(history)}>
         Home
       </Menu.Item>
@@ -48,13 +50,26 @@ const Navbar = () => {
         </Menu.Item>
       ) : null}
       {currentUser ? (
-        <Menu.Item
-          key="4"
+        <SubMenu
           style={{ float: 'right' }}
-          onClick={() => handleLogout(history)}
+          key="sub1"
+          title={
+            <span>
+              <Icon type="menu" /> <span>Menu</span>
+            </span>
+          }
         >
-          Logout
-        </Menu.Item>
+          <Menu.Item key="4" onClick={() => handleSettings(history)}>
+            <span>
+              <Icon type="setting" /> <span>Settings</span>
+            </span>
+          </Menu.Item>
+          <Menu.Item key="5" onClick={() => handleLogout(history)}>
+            <span>
+              <Icon type="logout" /> <span>Logout</span>
+            </span>
+          </Menu.Item>
+        </SubMenu>
       ) : null}
       {currentUser?.admin ? (
         <Menu.Item
