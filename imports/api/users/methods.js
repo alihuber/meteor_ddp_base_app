@@ -36,4 +36,21 @@ Meteor.methods({
       throw new Meteor.Error('update user error');
     }
   },
+  addUser: function(data) {
+    const pattern = {
+      username: String,
+      password: String,
+      admin: Match.Maybe(Boolean),
+    };
+    check(data, pattern);
+    const thisUser = Meteor.users.findOne(this.userId);
+    const isAdmin = thisUser?.admin;
+    if (isAdmin) {
+      const newId = Accounts.createUser(data);
+      const admin = data.admin || false;
+      Meteor.users.update({ _id: newId }, { $set: { admin } });
+    } else {
+      throw new Meteor.Error('update user error');
+    }
+  },
 });

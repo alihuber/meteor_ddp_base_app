@@ -55,4 +55,5 @@ EditUserModal.propTypes = {
   onOk: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
+
 export default EditUserModal;

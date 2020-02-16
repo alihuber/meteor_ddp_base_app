@@ -6,7 +6,10 @@ Meteor.publish('userData', function() {
   if (user?.admin) {
     return Meteor.users.find(
       {},
-      { fields: { username: 1, admin: 1, createdAt: 1 } },
+      {
+        fields: { username: 1, admin: 1, createdAt: 1 },
+        sort: { createdAt: -1 },
+      },
     );
   } else {
     return [];

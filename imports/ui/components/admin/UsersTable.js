@@ -5,12 +5,14 @@ import { toast } from 'react-toastify';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Table, Divider, Icon, Button, Modal } from 'antd';
 import EditUserModal from './EditUserModal';
+import CreateUserModal from './CreateUserModal';
 import Loading from '../Loading';
 
 const { confirm } = Modal;
 
 const UsersTable = () => {
   const [editModalVisible, setEditModalVisible] = useState(false);
+  const [createModalVisible, setCreateModalVisible] = useState(false);
   const [editUser, setEditUser] = useState(null);
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
@@ -55,6 +57,25 @@ const UsersTable = () => {
     setEditModalVisible(false);
   };
 
+  const handleCreateOk = (data) => {
+    Meteor.call('addUser', data, (err, res) => {
+      if (err) {
+        toast.error('Create not successful!', {
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      } else {
+        toast.success('Create successful!', {
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
+    });
+    setCreateModalVisible(false);
+  };
+
+  const handleCreateCancel = () => {
+    setCreateModalVisible(false);
+  };
+
   const handleEditCancel = () => {
     setEditModalVisible(false);
     setEditUser(null);
@@ -67,7 +88,13 @@ const UsersTable = () => {
 
   const users = useTracker(() =>
     Meteor.users
-      .find({}, { fields: { username: 1, admin: 1, createdAt: 1 } })
+      .find(
+        {},
+        {
+          fields: { username: 1, admin: 1, createdAt: 1 },
+          sort: { createdAt: -1 },
+        },
+      )
       .fetch(),
   ).map((u) => {
     return { ...u, key: u._id };
@@ -141,12 +168,20 @@ const UsersTable = () => {
     <Loading />
   ) : (
     <>
+      <Button type="primary" onClick={() => setCreateModalVisible(true)}>
+        Create user
+      </Button>
       <Table columns={columns} dataSource={users} />
       <EditUserModal
         user={editUser}
         visible={editModalVisible}
         onOk={handleEditOk}
         onCancel={handleEditCancel}
+      />
+      <CreateUserModal
+        visible={createModalVisible}
+        onOk={handleCreateOk}
+        onCancel={handleCreateCancel}
       />
     </>
   );
