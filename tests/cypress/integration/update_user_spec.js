@@ -38,6 +38,7 @@ describe('update-user', () => {
           .should('have.length', 3);
 
         // login with updated username
+        cy.contains('Menu').click();
         cy.contains('Logout').click();
         cy.window().then(() => {
           cy.url().should('eq', 'http://localhost:3000/');
@@ -95,6 +96,7 @@ describe('update-user', () => {
           .should('have.length', 3);
 
         // login with updated user
+        cy.contains('Menu').click();
         cy.contains('Logout').click();
         cy.window().then(() => {
           cy.url().should('eq', 'http://localhost:3000/');
