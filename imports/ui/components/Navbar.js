@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
+import { LogoutOutlined, MenuOutlined, SettingOutlined } from '@ant-design/icons';
 import { toast } from 'react-toastify';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
@@ -55,18 +56,18 @@ const Navbar = () => {
           key="sub1"
           title={
             <span>
-              <Icon type="menu" /> <span>Menu</span>
+              <MenuOutlined /> <span>Menu</span>
             </span>
           }
         >
           <Menu.Item key="4" onClick={() => handleSettings(history)}>
             <span>
-              <Icon type="setting" /> <span>Settings</span>
+              <SettingOutlined /> <span>Settings</span>
             </span>
           </Menu.Item>
           <Menu.Item key="5" onClick={() => handleLogout(history)}>
             <span>
-              <Icon type="logout" /> <span>Logout</span>
+              <LogoutOutlined /> <span>Logout</span>
             </span>
           </Menu.Item>
         </SubMenu>

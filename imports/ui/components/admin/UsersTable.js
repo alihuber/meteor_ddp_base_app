@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Table, Divider, Icon, Button, Modal } from 'antd';
+import { Table, Divider, Button, Modal } from 'antd';
+import { CheckOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EditUserModal from './EditUserModal';
 import CreateUserModal from './CreateUserModal';
 import Loading from '../Loading';
@@ -110,7 +111,7 @@ const UsersTable = () => {
     title: 'Admin',
     key: 'admin',
     render: (text, record) => {
-      return <span>{record.admin ? <Icon type="check" /> : null}</span>;
+      return <span>{record.admin ? <CheckOutlined /> : null}</span>;
     },
   };
   const actionCol = {
@@ -121,7 +122,7 @@ const UsersTable = () => {
         <Button
           id={`editUser_${record._id}`}
           type="primary"
-          icon="edit"
+          icon={<EditOutlined />}
           size="small"
           onClick={() => showEditUserModal(record)}
         />
@@ -129,7 +130,7 @@ const UsersTable = () => {
         <Button
           id={`deleteUser_${record._id}`}
           type="danger"
-          icon="delete"
+          icon={<DeleteOutlined />}
           size="small"
           onClick={() => showConfirmDelete(record._id)}
         />
@@ -169,28 +170,28 @@ const UsersTable = () => {
   return listLoading ? (
     <Loading />
   ) : (
-    <>
-      <Button
-        id="createUserButton"
-        type="primary"
-        onClick={() => setCreateModalVisible(true)}
-      >
-        Create user
+      <>
+        <Button
+          id="createUserButton"
+          type="primary"
+          onClick={() => setCreateModalVisible(true)}
+        >
+          Create user
       </Button>
-      <Table columns={columns} dataSource={users} />
-      <EditUserModal
-        user={editUser}
-        visible={editModalVisible}
-        onOk={handleEditOk}
-        onCancel={handleEditCancel}
-      />
-      <CreateUserModal
-        visible={createModalVisible}
-        onOk={handleCreateOk}
-        onCancel={handleCreateCancel}
-      />
-    </>
-  );
+        <Table columns={columns} dataSource={users} />
+        <EditUserModal
+          user={editUser}
+          visible={editModalVisible}
+          onOk={handleEditOk}
+          onCancel={handleEditCancel}
+        />
+        <CreateUserModal
+          visible={createModalVisible}
+          onOk={handleCreateOk}
+          onCancel={handleCreateCancel}
+        />
+      </>
+    );
 };
 
 export default UsersTable;
