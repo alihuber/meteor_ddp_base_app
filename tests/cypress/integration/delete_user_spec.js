@@ -19,6 +19,7 @@ describe('delete-user', () => {
     cy.url().should('eq', 'http://localhost:3000/');
 
     cy.window().then(() => {
+      cy.contains('Menu').click();
       cy.contains('Users').click();
 
       cy.window().then(() => {

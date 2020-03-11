@@ -19,6 +19,7 @@ describe('display-users-table', () => {
     cy.url().should('eq', 'http://localhost:3000/');
 
     cy.window().then(() => {
+      cy.contains('Menu').click();
       cy.get('li').should('not.contain', 'Users');
     });
   });
@@ -32,6 +33,7 @@ describe('display-users-table', () => {
     cy.url().should('eq', 'http://localhost:3000/');
 
     cy.window().then(() => {
+      cy.contains('Menu').click();
       cy.get('li').should('contain', 'Users');
     });
   });
@@ -45,6 +47,7 @@ describe('display-users-table', () => {
     cy.url().should('eq', 'http://localhost:3000/');
 
     cy.window().then(() => {
+      cy.contains('Menu').click();
       cy.contains('Users').click();
 
       cy.window().then(() => {

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Menu } from 'antd';
-import { LogoutOutlined, MenuOutlined, SettingOutlined } from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined, MenuOutlined, SettingOutlined } from '@ant-design/icons';
 import { toast } from 'react-toastify';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
@@ -60,6 +60,16 @@ const Navbar = () => {
             </span>
           }
         >
+          {currentUser?.admin ? (
+            <Menu.Item
+              key="3"
+              onClick={() => handleUsers(history)}
+            >
+              <span>
+                <UserOutlined /><span>Users</span>
+              </span>
+            </Menu.Item>
+          ) : null}
           <Menu.Item key="4" onClick={() => handleSettings(history)}>
             <span>
               <SettingOutlined /> <span>Settings</span>
@@ -71,15 +81,6 @@ const Navbar = () => {
             </span>
           </Menu.Item>
         </SubMenu>
-      ) : null}
-      {currentUser?.admin ? (
-        <Menu.Item
-          key="3"
-          style={{ float: 'right' }}
-          onClick={() => handleUsers(history)}
-        >
-          Users
-        </Menu.Item>
       ) : null}
     </Menu>
   );
