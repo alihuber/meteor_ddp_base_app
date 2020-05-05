@@ -11,20 +11,20 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.0.2",
-    "@babel/runtime": "^7.8.7",
-    "antd": "^4.0.2",
+    "@ant-design/icons": "^4.1.0",
+    "@babel/runtime": "^7.9.6",
+    "antd": "^4.2.0",
     "meteor-node-stubs": "^1.0.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-responsive": "^8.0.3",
     "react-router-dom": "^5.1.2",
-    "react-spinners": "^0.8.1",
+    "react-spinners": "^0.8.3",
     "react-toastify": "^5.5.0",
-    "simpl-schema": "^1.5.7",
-    "uniforms": "^2.6.6",
-    "uniforms-antd": "^2.6.6",
-    "uniforms-bridge-simple-schema-2": "^2.6.6"
+    "simpl-schema": "^1.7.0",
+    "uniforms": "^2.6.7",
+    "uniforms-antd": "^2.6.7",
+    "uniforms-bridge-simple-schema-2": "^2.6.7"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
