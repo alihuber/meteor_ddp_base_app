@@ -2,7 +2,11 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Menu } from 'antd';
-import { UserOutlined, LogoutOutlined, MenuOutlined, SettingOutlined } from '@ant-design/icons';
+// import { UserOutlined, LogoutOutlined, MenuOutlined, SettingOutlined } from '@ant-design/icons';
+import UserOutlined from '@ant-design/icons/UserOutlined';
+import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
+import MenuOutlined from '@ant-design/icons/MenuOutlined';
+import SettingOutlined from '@ant-design/icons/SettingOutlined';
 import { toast } from 'react-toastify';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
@@ -54,11 +58,13 @@ const Navbar = () => {
         <SubMenu
           style={{ float: 'right' }}
           key="sub1"
-          title={
+          title={(
             <span>
-              <MenuOutlined /> <span>Menu</span>
+              <MenuOutlined />
+              {' '}
+              <span>Menu</span>
             </span>
-          }
+          )}
         >
           {currentUser?.admin ? (
             <Menu.Item
@@ -66,18 +72,24 @@ const Navbar = () => {
               onClick={() => handleUsers(history)}
             >
               <span>
-                <UserOutlined /><span>Users</span>
+                <UserOutlined />
+                {' '}
+                <span>Users</span>
               </span>
             </Menu.Item>
           ) : null}
           <Menu.Item key="4" onClick={() => handleSettings(history)}>
             <span>
-              <SettingOutlined /> <span>Settings</span>
+              <SettingOutlined />
+              {' '}
+              <span>Settings</span>
             </span>
           </Menu.Item>
           <Menu.Item key="5" onClick={() => handleLogout(history)}>
             <span>
-              <LogoutOutlined /> <span>Logout</span>
+              <LogoutOutlined />
+              {' '}
+              <span>Logout</span>
             </span>
           </Menu.Item>
         </SubMenu>

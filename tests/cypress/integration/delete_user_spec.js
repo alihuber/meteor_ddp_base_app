@@ -1,4 +1,4 @@
-/* globals cy expect */
+/* globals cy */
 
 describe('delete-user', () => {
   before(() => {
