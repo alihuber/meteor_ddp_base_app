@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { onPageLoad } from 'meteor/server-render';
-
+import './agenda';
 import './publications.js';
 import '../imports/startup/server/methods';
 

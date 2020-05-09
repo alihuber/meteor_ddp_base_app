@@ -13,6 +13,8 @@
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
     "@babel/runtime": "^7.9.6",
+    "agenda": "^3.1.0",
+    "agendash": "^1.0.0",
     "antd": "^4.2.0",
     "meteor-node-stubs": "^1.0.0",
     "react": "^16.13.1",
