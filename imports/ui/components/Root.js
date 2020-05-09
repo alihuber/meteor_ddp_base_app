@@ -7,11 +7,11 @@ import Layout from './Layout';
 import Routing from './Routing';
 import AnimationContext from '../contexts/AnimationContext';
 import CurrentUserContext from '../contexts/CurrentUserContext';
+import ServerConnectionContext from '../contexts/ServerConnectionContext';
 
 toast.configure();
 
 const Root = () => {
-  // const [currentUser, setCurrentUser] = useState(null);
   const layout = Layout;
   const animClass =
     window.innerWidth > 860
@@ -25,6 +25,10 @@ const Root = () => {
     );
   }, [Meteor.userId()]);
 
+  const serverConnection = useTracker(() => {
+    return Meteor.connection.status().status;
+  }, [Meteor.connection.status().connected]);
+
   useTracker(() => {
     const handle = Meteor.subscribe('currentUser');
     return !handle.ready();
@@ -32,11 +36,13 @@ const Root = () => {
 
   return (
     <>
-      <AnimationContext.Provider value={animClass}>
-        <CurrentUserContext.Provider value={currentUser}>
-          <Routing LayoutComponent={layout} />
-        </CurrentUserContext.Provider>
-      </AnimationContext.Provider>
+      <ServerConnectionContext.Provider value={serverConnection}>
+        <AnimationContext.Provider value={animClass}>
+          <CurrentUserContext.Provider value={currentUser}>
+            <Routing LayoutComponent={layout} />
+          </CurrentUserContext.Provider>
+        </AnimationContext.Provider>
+      </ServerConnectionContext.Provider>
       <ToastContainer autoClose={3000} />
     </>
   );

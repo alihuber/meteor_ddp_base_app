@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useMediaQuery } from 'react-responsive';
 import { Layout, Row, Col } from 'antd';
 import Navbar from './Navbar.js';
+import Loading from './Loading';
+import ServerConnectionContext from '../contexts/ServerConnectionContext';
 
 const { Header, Content } = Layout;
 
 const LayoutComponent = ({ children }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
   const paddingStr = isTabletOrMobile ? '0' : '0 50px';
+  const connectionStatus = useContext(ServerConnectionContext);
   return (
     <Layout>
       <Header
@@ -18,20 +21,22 @@ const LayoutComponent = ({ children }) => {
         <Navbar />
       </Header>
       <Layout>
-        <Content
-          style={{
-            background: '#fff',
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-          }}
-        >
-          <Row>
-            <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
-              {children}
-            </Col>
-          </Row>
-        </Content>
+        {connectionStatus === 'connected' ? (
+          <Content
+            style={{
+              background: '#fff',
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+            }}
+          >
+            <Row>
+              <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
+                {children}
+              </Col>
+            </Row>
+          </Content>
+        ) : <Loading />}
       </Layout>
     </Layout>
   );
