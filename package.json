@@ -26,7 +26,8 @@
     "simpl-schema": "^1.7.0",
     "uniforms": "^2.6.7",
     "uniforms-antd": "^2.6.7",
-    "uniforms-bridge-simple-schema-2": "^2.6.7"
+    "uniforms-bridge-simple-schema-2": "^2.6.7",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
