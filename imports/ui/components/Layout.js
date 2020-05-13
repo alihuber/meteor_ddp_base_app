@@ -6,28 +6,29 @@ import Navbar from './Navbar.js';
 import Loading from './Loading';
 import ServerConnectionContext from '../contexts/ServerConnectionContext';
 
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 const LayoutComponent = ({ children }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
   const paddingStr = isTabletOrMobile ? '0' : '0 50px';
   const connectionStatus = useContext(ServerConnectionContext);
+  const width = window.innerWidth;
   return (
     <Layout>
       <Header
         className="header"
-        style={{ lineHeight: '47px', height: '47px', padding: paddingStr }}
+        style={{ position: 'fixed', zIndex: 1, lineHeight: '47px', height: '47px', padding: paddingStr, width: width }}
       >
         <Navbar />
       </Header>
-      <Layout>
+      <Content style={{ marginTop: 48 }}>
         {connectionStatus === 'connected' ? (
           <Content
             style={{
               background: '#fff',
               padding: 24,
               margin: 0,
-              minHeight: 280,
+              minHeight: 900,
             }}
           >
             <Row>
@@ -37,7 +38,8 @@ const LayoutComponent = ({ children }) => {
             </Row>
           </Content>
         ) : <Loading />}
-      </Layout>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>ACME Corp.</Footer>
     </Layout>
   );
 };
