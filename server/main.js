@@ -28,7 +28,7 @@ Meteor.startup(() => {
     Accounts.setPassword(newUser._id, pw);
   }
 
-  logger.info(`\nserver started... registered users: ${Meteor.users.find({}).fetch().length}`);
+  logger.info(`server started... registered users: ${Meteor.users.find({}).fetch().length}`);
 });
 
 onPageLoad((sink) => {

@@ -5,6 +5,7 @@ import { Menu } from 'antd';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
 import MenuOutlined from '@ant-design/icons/MenuOutlined';
+import RedoOutlined from '@ant-design/icons/RedoOutlined';
 import SettingOutlined from '@ant-design/icons/SettingOutlined';
 import { toast } from 'react-toastify';
 import CurrentUserContext from '../contexts/CurrentUserContext';
@@ -102,7 +103,7 @@ const Navbar = () => {
       <Menu.Item key="1" onClick={() => handleHome(history)}>
         Home
       </Menu.Item>
-      {connectionStatus === 'connected' ? userMenu(currentUser, history) : null}
+      {connectionStatus === 'connected' ? userMenu(currentUser, history) : <Menu.Item key="7" style={{ float: 'right' }} onClick={() => Meteor.reconnect()}><RedoOutlined /></Menu.Item>}
     </Menu>
   );
 };
