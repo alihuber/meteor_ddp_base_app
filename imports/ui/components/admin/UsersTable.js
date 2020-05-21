@@ -3,15 +3,16 @@ import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Table, Divider, Button, Modal } from 'antd';
+import Table from 'antd/es/table/Table';
+import Divider from 'antd/es/divider';
+import Button from 'antd/es/button/button';
+import confirm from 'antd/es/modal/confirm';
 import CheckOutlined from '@ant-design/icons/CheckOutlined';
 import EditOutlined from '@ant-design/icons/EditOutlined';
 import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 import EditUserModal from './EditUserModal';
 import CreateUserModal from './CreateUserModal';
 import Loading from '../Loading';
-
-const { confirm } = Modal;
 
 const UsersTable = () => {
   const [editModalVisible, setEditModalVisible] = useState(false);

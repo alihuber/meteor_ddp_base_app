@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Menu } from 'antd';
+import Menu from 'antd/es/menu';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
 import MenuOutlined from '@ant-design/icons/MenuOutlined';

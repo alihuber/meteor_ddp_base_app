@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import HomePage from './HomePage.js';
-import Login from './Login.js';
-import NotFoundPage from './NotFoundPage';
-import Users from './admin/Users';
-// import Settings from './Settings';
-// import Messages from './Messages';
+import Loading from './Loading';
+
+const HomePage = lazy(() => import('./HomePage'));
+const Login = lazy(() => import('./Login'));
+const Users = lazy(() => import('./admin/Users'));
+const NotFoundPage = lazy(() => import('./NotFoundPage'));
+const renderLoader = () => <Loading />;
 
 const Routing = ({ LayoutComponent }) => {
   const LoadingLayout = LayoutComponent;
@@ -17,16 +18,24 @@ const Routing = ({ LayoutComponent }) => {
         <LoadingLayout>
           <Switch>
             <Route exact path="/">
-              <HomePage />
+              <Suspense fallback={renderLoader()}>
+                <HomePage />
+              </Suspense>
             </Route>
             <Route exact path="/login">
-              <Login />
+              <Suspense fallback={renderLoader()}>
+                <Login />
+              </Suspense>
             </Route>
             <Route exact path="/users">
-              <Users />
+              <Suspense fallback={renderLoader()}>
+                <Users />
+              </Suspense>
             </Route>
             <Route exact>
-              <NotFoundPage />
+              <Suspense fallback={renderLoader()}>
+                <NotFoundPage />
+              </Suspense>
             </Route>
           </Switch>
         </LoadingLayout>

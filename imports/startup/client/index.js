@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { render } from 'react-dom';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import Root from '../../ui/components/Root';
 import './react-transitions.css';
 

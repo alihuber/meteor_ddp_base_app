@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Typography } from 'antd';
+import Title from 'antd/es/typography/Title';
 import AnimationContext from '../../contexts/AnimationContext';
 import UsersTable from './UsersTable';
-
-const { Title } = Typography;
 
 const Users = () => {
   const animationClass = useContext(AnimationContext);

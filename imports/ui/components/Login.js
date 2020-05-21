@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AutoFields, AutoForm, ErrorsField, SubmitField } from 'uniforms-antd';
-import { Card } from 'antd';
+import Card from 'antd/es/card';
 import SimpleSchema from 'simpl-schema';
 import { toast } from 'react-toastify';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';

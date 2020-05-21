@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { ScaleLoader } from 'react-spinners';
-import { Row } from 'antd';
+import ScaleLoader from 'react-spinners/ScaleLoader';
+import Row from 'antd/es/row';
 import AnimationContext from '../contexts/AnimationContext';
 
 const Loading = () => {
