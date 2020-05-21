@@ -25,7 +25,7 @@ const LayoutComponent = ({ children }) => {
       </Header>
       <Content style={{ marginTop: 48 }}>
         {connectionStatus === 'connected' ? (
-          <Content
+          <div
             style={{
               background: '#fff',
               padding: 24,
@@ -38,7 +38,7 @@ const LayoutComponent = ({ children }) => {
                 {children}
               </Col>
             </Row>
-          </Content>
+          </div>
         ) : <Loading />}
       </Content>
       <Footer style={{ textAlign: 'center' }}>ACME Corp.</Footer>
