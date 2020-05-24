@@ -30,7 +30,7 @@ const LayoutComponent = ({ children }) => {
               background: '#fff',
               padding: 24,
               margin: 0,
-              height: 'calc(100vh - 55px)',
+              minHeight: 'calc(100vh - 55px)',
             }}
           >
             <Row>
