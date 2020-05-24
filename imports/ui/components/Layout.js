@@ -30,7 +30,7 @@ const LayoutComponent = ({ children }) => {
               background: '#fff',
               padding: 24,
               margin: 0,
-              minHeight: 900,
+              height: 'calc(100vh - 55px)',
             }}
           >
             <Row>
@@ -41,7 +41,7 @@ const LayoutComponent = ({ children }) => {
           </div>
         ) : <Loading />}
       </Content>
-      <Footer style={{ textAlign: 'center' }}>ACME Corp.</Footer>
+      <Footer style={{ position: 'sticky', textAlign: 'center', bottom: '0px' }}>ACME Corp.</Footer>
     </Layout>
   );
 };
