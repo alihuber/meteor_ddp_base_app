@@ -7,6 +7,7 @@ import SimpleSchema from 'simpl-schema';
 import { toast } from 'react-toastify';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import AnimationContext from '../contexts/AnimationContext';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 const loginSchema = new SimpleSchema({
   username: {
@@ -54,6 +55,10 @@ const handleSubmit = (values, history) => {
 const LoginPage = () => {
   const animClass = useContext(AnimationContext);
   const history = useHistory();
+  const currentUser = useContext(CurrentUserContext);
+  if (currentUser) {
+    history.push('/');
+  }
   return (
     <div className={animClass}>
       <Card title="Login">
