@@ -1,18 +1,19 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import Layout from 'antd/es/layout/layout';
-import Row from 'antd/es/row';
-import Col from 'antd/es/col';
-import Navbar from './Navbar.js';
-import Loading from './Loading';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import ServerConnectionContext from '../contexts/ServerConnectionContext';
-
-const { Header, Content, Footer } = Layout;
+import publicLayout from './layout/publicLayout';
+import loggedInLayout from './layout/loggedInLayout';
+import loggedInMobileLayout from './layout/loggedInMobileLayout';
 
 const LayoutComponent = ({ children }) => {
   const [width, setWidth] = useState(window.innerWidth);
+  const history = useHistory();
   const connectionStatus = useContext(ServerConnectionContext);
+  const currentUser = useContext(CurrentUserContext);
+  const [collapsed, setCollapsed] = useState(true);
   const handleMediaQueryChange = () => {
     setWidth(window.innerWidth);
   };
@@ -23,35 +24,13 @@ const LayoutComponent = ({ children }) => {
 
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' }, undefined, handleMediaQueryChange);
   const paddingStr = isTabletOrMobile ? '0' : '0 50px';
-  return (
-    <Layout>
-      <Header
-        className="header"
-        style={{ position: 'fixed', zIndex: 1, lineHeight: '47px', height: '47px', padding: paddingStr, width: width }}
-      >
-        <Navbar />
-      </Header>
-      <Content style={{ marginTop: 48 }}>
-        {connectionStatus === 'connected' ? (
-          <div
-            style={{
-              background: '#fff',
-              padding: 24,
-              margin: 0,
-              minHeight: 'calc(100vh - 55px)',
-            }}
-          >
-            <Row>
-              <Col xs={{ span: 24 }} lg={{ span: 12, offset: 6 }}>
-                {children}
-              </Col>
-            </Row>
-          </div>
-        ) : <Loading />}
-      </Content>
-      <Footer style={{ position: 'sticky', textAlign: 'center', bottom: '0px' }}>ACME Corp.</Footer>
-    </Layout>
-  );
+  if (currentUser && !isTabletOrMobile) {
+    return loggedInLayout(currentUser, children, paddingStr, width, collapsed, setCollapsed, isTabletOrMobile, connectionStatus, history);
+  } else if (currentUser && isTabletOrMobile) {
+    return loggedInMobileLayout(children, paddingStr, width, collapsed, setCollapsed, isTabletOrMobile, connectionStatus);
+  } else {
+    return publicLayout(children, paddingStr, width, isTabletOrMobile, connectionStatus);
+  }
 };
 
 LayoutComponent.propTypes = {

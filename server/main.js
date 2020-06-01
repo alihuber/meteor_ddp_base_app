@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { onPageLoad } from 'meteor/server-render';
 import './agenda';
-import './publications.js';
+import './publications';
 import '../imports/startup/server/methods';
 
 const { createLogger, transports, format } = require('winston');

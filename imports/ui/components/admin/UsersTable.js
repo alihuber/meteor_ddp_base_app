@@ -163,7 +163,7 @@ const UsersTable = () => {
             hour: '2-digit',
             minute: '2-digit',
           };
-          return <span>{date.toLocaleDateString('de-DE', options)}</span>;
+          return <span>{date && date.toLocaleDateString('de-DE', options)}</span>;
         },
       },
       actionCol,
@@ -181,6 +181,9 @@ const UsersTable = () => {
         >
           Create user
       </Button>
+        <br />
+        {' '}
+        &nbsp;
         <Table columns={columns} dataSource={users} />
         <EditUserModal
           user={editUser}
