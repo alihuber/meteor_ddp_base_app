@@ -33,10 +33,7 @@ Meteor.startup(() => {
     logger.info('regular user not found, seeding user...');
     const newId = Meteor.users.insert({ username: 'asdf', admin: false });
     const pw = 'asdfasdf';
-    const newSettings = DEFAULT_SETTINGS;
-    newSettings.userId = newId;
     Accounts.setPassword(newId, pw);
-    Settings.insert(newSettings);
   }
 
   logger.info(`server started... registered users: ${Meteor.users.find({}).fetch().length}`);
