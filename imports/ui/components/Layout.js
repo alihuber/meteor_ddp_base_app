@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useMediaQuery } from 'react-responsive';
 import Layout from 'antd/es/layout/layout';
@@ -11,10 +11,18 @@ import ServerConnectionContext from '../contexts/ServerConnectionContext';
 const { Header, Content, Footer } = Layout;
 
 const LayoutComponent = ({ children }) => {
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
-  const paddingStr = isTabletOrMobile ? '0' : '0 50px';
+  const [width, setWidth] = useState(window.innerWidth);
   const connectionStatus = useContext(ServerConnectionContext);
-  const width = window.innerWidth;
+  const handleMediaQueryChange = () => {
+    setWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', handleMediaQueryChange);
+    window.addEventListener('orientationchange', handleMediaQueryChange);
+  }, []);
+
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' }, undefined, handleMediaQueryChange);
+  const paddingStr = isTabletOrMobile ? '0' : '0 50px';
   return (
     <Layout>
       <Header
